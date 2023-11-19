@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ubymed_mobile_client",
-    "slug": "ubymed_mobile_client",
+    "slug": "ubymed-mobile-client",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -34,6 +34,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "8e8b717a-279e-449f-8c31-cbe8a4817bf7"
+      }
+    },
+    "owner": "mflores.ubymed"
   }
 }
