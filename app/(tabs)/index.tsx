@@ -1,31 +1,45 @@
-import { StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Pressable } from "react-native";
+import { Link } from "expo-router";
+import { Text, View, FlatList, ActivityIndicator } from '../../components/Themed';
+import { SectionHeader } from '../../components/SectionHeader';
+import { obtenerServiciosDisponibles } from '../../api/ubymed';
+import { Servicio } from '../../types/servicios';
 
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
+export default function InicioScreen() {
+  const [servicios, setServicios] = useState<Servicio[] | null>(null);
 
-export default function TabOneScreen() {
+  useEffect(() => {
+    obtenerServiciosDisponibles()
+      .then((data) => {
+        setServicios(data);
+      })
+      .catch((error) => {
+        console.error('Error al obtener los servicios:', error);
+      });
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+    <View>
+      <SectionHeader title='Servicios Disponibles'/>
+      {servicios ? (
+        <FlatList
+          data={servicios}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <Link href={{
+              pathname: "/modal",
+              params: { nombre: item.nombre, descripcion: item.descripcion },
+            }} asChild>
+              <Pressable>
+                <Text>{item.nombre}</Text>
+              </Pressable>
+            </Link>
+          )}
+        />
+      ) : (
+        <ActivityIndicator/>
+      )}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
