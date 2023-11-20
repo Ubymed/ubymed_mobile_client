@@ -3,7 +3,7 @@ import { Pressable } from "react-native";
 import { Link } from "expo-router";
 import { Text, View, FlatList, ActivityIndicator } from '../../components/Themed';
 import { SectionHeader } from '../../components/SectionHeader';
-import { obtenerServiciosDisponibles, obtenerUbymedAPI } from '../../api/ubymed';
+import { obtenerUbymedAPI } from '../../api/ubymed';
 import { Servicio } from '../../types/servicios';
 
 export default function InicioScreen() {
@@ -29,8 +29,8 @@ export default function InicioScreen() {
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <Link href={{
-              pathname: "/modal",
-              params: { nombre: item.nombre, descripcion: item.descripcion },
+              pathname: "/servicios",
+              params: { nombre: item.nombre, descripcion: item.descripcion, url: item.url },
             }} asChild>
               <Pressable>
                 <Text>{item.nombre}</Text>
