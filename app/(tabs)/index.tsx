@@ -3,16 +3,17 @@ import { Pressable } from "react-native";
 import { Link } from "expo-router";
 import { Text, View, FlatList, ActivityIndicator } from '../../components/Themed';
 import { SectionHeader } from '../../components/SectionHeader';
-import { obtenerServiciosDisponibles } from '../../api/ubymed';
+import { obtenerServiciosDisponibles, obtenerUbymedAPI } from '../../api/ubymed';
 import { Servicio } from '../../types/servicios';
 
 export default function InicioScreen() {
   const [servicios, setServicios] = useState<Servicio[] | null>(null);
 
   useEffect(() => {
-    obtenerServiciosDisponibles()
+    obtenerUbymedAPI("servicios")
       .then((data) => {
-        setServicios(data);
+        const serviciosActivos = data.filter((servicio: Servicio) => servicio.is_active);
+        setServicios(serviciosActivos);
       })
       .catch((error) => {
         console.error('Error al obtener los servicios:', error);
