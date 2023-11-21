@@ -3,6 +3,7 @@ export type Servicio = {
     nombre: string;
     descripcion: string;
     url: string;
+    sort_index: number;
     is_active: boolean;
   };
 

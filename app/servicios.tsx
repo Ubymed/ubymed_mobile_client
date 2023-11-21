@@ -22,14 +22,8 @@ export default function ServiciosScreen() {
   }, []);
 
   return (
-    <View>
-      <Stack.Screen
-        options={{
-          title: nombre.toString(),
-        }}
-      />
-      <Text>{nombre}</Text>
-      <Text>{descripcion}</Text>
+    <View style={{ flex: 1 }}>
+      <Stack.Screen options={{ title: nombre.toString() }} />
       {catalogoConsultas ? (
         <FlatList
           data={catalogoConsultas}
