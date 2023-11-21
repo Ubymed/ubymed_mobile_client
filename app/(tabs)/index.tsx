@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Pressable } from "react-native";
+import { Pressable, SectionList } from "react-native";
 import { Link } from "expo-router";
 import { Text, View, FlatList, ActivityIndicator } from '../../components/Themed';
 import { SectionHeader } from '../../components/SectionHeader';
 import { obtenerUbymedAPI } from '../../api/ubymed';
 import { Servicio } from '../../types/servicios';
+import { ServicioCard } from '../../components/Cards';
 
 export default function InicioScreen() {
   const [servicios, setServicios] = useState<Servicio[] | null>(null);
@@ -21,11 +22,14 @@ export default function InicioScreen() {
   }, []);
 
   return (
-    <View>
-      <SectionHeader title='Servicios Disponibles'/>
+    <View style={{ flex: 1 }}>
       {servicios ? (
-        <FlatList
-          data={servicios}
+        <SectionList
+          sections={[
+            { title: 'Servicios Disponibles', data: servicios },
+            { title: 'Directorios', data: servicios },
+            { title: 'Promociones', data: servicios },
+          ]}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <Link href={{
@@ -33,9 +37,12 @@ export default function InicioScreen() {
               params: { nombre: item.nombre, descripcion: item.descripcion, url: item.url },
             }} asChild>
               <Pressable>
-                <Text>{item.nombre}</Text>
+                <ServicioCard nombre={item.nombre} descripcion={item.descripcion} />
               </Pressable>
             </Link>
+          )}
+          renderSectionHeader={({ section: { title } }) => (
+            <SectionHeader title={title} />
           )}
         />
       ) : (
@@ -44,3 +51,4 @@ export default function InicioScreen() {
     </View>
   );
 }
+

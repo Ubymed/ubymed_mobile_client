@@ -4,8 +4,7 @@ import { useLocalSearchParams } from "expo-router";
 import { Text, View, FlatList, ActivityIndicator  } from '../components/Themed';
 import { obtenerUbymedAPI } from '../api/ubymed';
 import { CatalogoConsultaMedica } from "../types/servicios";
-import { Link } from "expo-router";
-import { Pressable } from "react-native";
+import { ServicioCard } from '../components/Cards';
 
 export default function ServiciosScreen() {
   const params = useLocalSearchParams();
@@ -36,7 +35,7 @@ export default function ServiciosScreen() {
           data={catalogoConsultas}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <Text>{item.nombre}</Text>
+            <ServicioCard nombre={item.nombre} descripcion={item.descripcion} />
           )}
         />
       ) : (
