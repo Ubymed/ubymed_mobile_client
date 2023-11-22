@@ -46,7 +46,7 @@ export default function InicioScreen() {
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <Link href={{
-              pathname: "/servicios",
+              pathname: `/${item.url}`,
               params: { nombre: item.nombre, descripcion: item.descripcion, url: item.url },
             }} asChild>
               <Pressable>
