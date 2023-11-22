@@ -15,7 +15,7 @@ export default function InicioScreen() {
     obtenerUbymedAPI("servicios")
       .then((data) => {
         const serviciosActivos = data
-          .filter((servicio: Servicio) => servicio.is_active)
+          .filter((servicio: Servicio) => servicio.active)
           .sort((a: Servicio, b: Servicio) => a.sort_index - b.sort_index);
         setServicios(serviciosActivos);
       })

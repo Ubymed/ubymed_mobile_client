@@ -4,7 +4,7 @@ export type Servicio = {
     descripcion: string;
     url: string;
     sort_index: number;
-    is_active: boolean;
+    active: boolean;
   };
 
   export type CatalogoConsultaMedica = {
@@ -12,5 +12,7 @@ export type Servicio = {
     nombre: string;
     descripcion: string;
     descripcion_larga: string;
-    costo: boolean;
+    precio: boolean;
+    sort_index: number;
+    active: boolean;
   };

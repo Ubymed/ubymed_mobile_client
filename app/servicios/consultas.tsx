@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Stack } from 'expo-router';
 import { Pressable, SectionList } from "react-native";
 import { useLocalSearchParams } from "expo-router";
@@ -14,15 +14,22 @@ export default function ServiciosScreen() {
   const { nombre, descripcion, url } = params;
   const [catalogoConsultas, setCatalogo] = useState<CatalogoConsultaMedica[] | null>(null);
 
-  useEffect(() => {
+  const loadData = useCallback(() => {
     obtenerUbymedAPI(url)
       .then((data) => {
-        setCatalogo(data);
+        const serviciosActivos = data
+          .filter((servicio: CatalogoConsultaMedica) => servicio.active)
+          .sort((a: CatalogoConsultaMedica, b: CatalogoConsultaMedica) => a.sort_index - b.sort_index);
+        setCatalogo(serviciosActivos);
       })
       .catch((error) => {
         console.error('Error al obtener los servicios:', error);
       });
   }, []);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -35,7 +42,7 @@ export default function ServiciosScreen() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <Link href={{
-            pathname: "/",
+            pathname: "servicios/nueva",
             params: { nombre: item.nombre, descripcion: item.descripcion },
           }} asChild>
             <Pressable>
