@@ -6,12 +6,12 @@ import { Link } from "expo-router";
 import { Text, View, FlatList, ActivityIndicator  } from '../../components/Themed';
 import { obtenerUbymedAPI } from '../../api/ubymed';
 import { CatalogoConsultaMedica } from "../../types/servicios";
-import { ServicioCard } from '../../components/Cards';
+import { CategoryCard } from '../../components/Cards';
 import { SectionHeader } from '../../components/SectionHeader';
 
-export default function ServiciosScreen() {
+export default function ConsultasScreen() {
   const params = useLocalSearchParams();
-  const { nombre, descripcion, url } = params;
+  const { nombre, descripcion, descripcion_larga, tiempo_estimado, precio, cobertura, img_url, url } = params;
   const [catalogoConsultas, setCatalogo] = useState<CatalogoConsultaMedica[] | null>(null);
 
   const loadData = useCallback(() => {
@@ -42,11 +42,11 @@ export default function ServiciosScreen() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <Link href={{
-            pathname: "servicios/nueva",
-            params: { nombre: item.nombre, descripcion: item.descripcion },
+            pathname: "servicios/consultas_detalles",
+            params: { nombre: item.nombre, descripcion: item.descripcion, descripcion_larga: item.descripcion_larga, tiempo_estimado: item.tiempo_estimado, precio: item.precio, cobertura: item.cobertura, url: item.url, img_url: item.img_url },
           }} asChild>
             <Pressable>
-              <ServicioCard nombre={item.nombre} descripcion={item.descripcion} />
+              <CategoryCard nombre={item.nombre} descripcion={item.descripcion} />
             </Pressable>
           </Link>
         )}

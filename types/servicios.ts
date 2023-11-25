@@ -12,7 +12,10 @@ export type Servicio = {
     nombre: string;
     descripcion: string;
     descripcion_larga: string;
-    precio: boolean;
+    precio: number;
+    tiempo_estimado: string;
+    cobertura: string;
     sort_index: number;
     active: boolean;
+    img_url: string;
   };

@@ -5,7 +5,7 @@ import { Text, View, FlatList, ActivityIndicator } from '../../components/Themed
 import { SectionHeader } from '../../components/SectionHeader';
 import { obtenerUbymedAPI } from '../../api/ubymed';
 import { Servicio } from '../../types/servicios';
-import { ServicioCard } from '../../components/Cards';
+import { CategoryCard } from '../../components/Cards';
 
 export default function InicioScreen() {
   const [servicios, setServicios] = useState<Servicio[] | null>(null);
@@ -50,7 +50,7 @@ export default function InicioScreen() {
               params: { nombre: item.nombre, descripcion: item.descripcion, url: item.url },
             }} asChild>
               <Pressable>
-                <ServicioCard nombre={item.nombre} descripcion={item.descripcion} />
+                <CategoryCard nombre={item.nombre} descripcion={item.descripcion} />
               </Pressable>
             </Link>
           )}

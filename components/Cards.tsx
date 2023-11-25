@@ -2,12 +2,12 @@ import React, { forwardRef } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { Link } from "expo-router";
 
-interface CardProps {
+interface CategoryCardProps {
   nombre: string;
   descripcion: string;
 }
 
-export const ServicioCard = forwardRef<View, CardProps>((props, ref) => {
+export const CategoryCard = forwardRef<View, CardProps>((props, ref) => {
   const { nombre, descripcion } = props;
 
   return (
@@ -22,12 +22,12 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 20,
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 10,
-    marginBottom: 10,
-    borderRadius: 10,
+    padding: 24,
+    marginLeft: 24,
+    marginRight: 24,
+    marginTop: 8,
+    marginBottom: 8,
+    borderRadius: 16,
   },
   title: {
     fontSize: 18,

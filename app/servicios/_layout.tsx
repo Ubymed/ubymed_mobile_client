@@ -4,7 +4,7 @@ export default function Layout() {
   return (
     <Stack>
       <Stack.Screen name="consultas" />
-      <Stack.Screen name="nueva" />
+      <Stack.Screen name="consultas_detalles" />
     </Stack>
   );
 }
