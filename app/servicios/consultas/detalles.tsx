@@ -1,13 +1,12 @@
-import { Link, Stack } from 'expo-router';
-import { Text, View } from '../../components/Themed';
-import { useLocalSearchParams } from "expo-router";
-import { obtenerUbymedAPI } from '../../api/ubymed';
-import { BottomButton } from '../../components/Buttons';
-import { SimpleTable } from '../../components/Tables';
-import { StyleSheet } from 'react-native';
-import { ScrollView } from 'react-native';
-import { Pressable } from "react-native";
-import { Image } from 'react-native';
+// LIBRARIES
+import { StyleSheet, ScrollView, Pressable, Image } from 'react-native';
+import { Link, Stack, useLocalSearchParams } from 'expo-router';
+// COMPONENTS
+import { Text, View } from '../../../components/Themed';
+import { BottomButton } from '../../../components/Buttons';
+import { SimpleTable } from '../../../components/Tables';
+// API
+import { obtenerUbymedAPI } from '../../../api/ubymed';
 
 
 export default function ConsultasDetallesScreen() {
@@ -15,7 +14,7 @@ export default function ConsultasDetallesScreen() {
   const { nombre, descripcion, descripcion_larga, tiempo_estimado, precio, cobertura, img_url, url } = params;
   const data = [
     { title: 'Cobertura', detail: cobertura },
-    { title: 'Tiempo', detail: tiempo_estimado },
+    { title: 'Demora', detail: tiempo_estimado },
     { title: 'Precio', detail: "Q "+ precio },
   ];
 
@@ -31,7 +30,7 @@ export default function ConsultasDetallesScreen() {
         <Text style={styles.description}>{descripcion_larga}</Text>
         <SimpleTable data={data} />
         <Link href={{
-          pathname: "/consultas",
+          pathname: "/ordenes/consultas/cliente",
         }} asChild>
           <Pressable>
             <BottomButton title="Solicitar" />

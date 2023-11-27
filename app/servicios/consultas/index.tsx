@@ -1,13 +1,15 @@
+// LIBRARIES
 import React, { useState, useEffect, useCallback } from 'react';
-import { Stack } from 'expo-router';
 import { Pressable, SectionList } from "react-native";
-import { useLocalSearchParams } from "expo-router";
-import { Link } from "expo-router";
-import { Text, View, FlatList, ActivityIndicator  } from '../../components/Themed';
-import { obtenerUbymedAPI } from '../../api/ubymed';
-import { CatalogoConsultaMedica } from "../../types/servicios";
-import { CategoryCard } from '../../components/Cards';
-import { SectionHeader } from '../../components/SectionHeader';
+import { Stack, Link, useLocalSearchParams } from 'expo-router';
+// COMPONENTS
+import { Text, View, FlatList, ActivityIndicator  } from '../../../components/Themed';
+import { CategoryCard } from '../../../components/Cards';
+import { SectionHeader } from '../../../components/SectionHeader';
+// TYPES
+import { CatalogoConsultaMedica } from "../../../types/servicios";
+// API
+import { obtenerUbymedAPI } from '../../../api/ubymed';
 
 export default function ConsultasScreen() {
   const params = useLocalSearchParams();
@@ -42,7 +44,7 @@ export default function ConsultasScreen() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <Link href={{
-            pathname: "servicios/consultas_detalles",
+            pathname: "servicios/consultas/detalles",
             params: { nombre: item.nombre, descripcion: item.descripcion, descripcion_larga: item.descripcion_larga, tiempo_estimado: item.tiempo_estimado, precio: item.precio, cobertura: item.cobertura, url: item.url, img_url: item.img_url },
           }} asChild>
             <Pressable>

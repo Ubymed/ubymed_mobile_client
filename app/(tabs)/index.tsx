@@ -1,11 +1,15 @@
+// LIBRARIES
 import React, { useState, useEffect, useCallback } from 'react';
 import { Pressable, SectionList, RefreshControl } from "react-native";
 import { Link } from "expo-router";
+// COMPONENTS
 import { Text, View, FlatList, ActivityIndicator } from '../../components/Themed';
 import { SectionHeader } from '../../components/SectionHeader';
-import { obtenerUbymedAPI } from '../../api/ubymed';
-import { Servicio } from '../../types/servicios';
 import { CategoryCard } from '../../components/Cards';
+// TYPES
+import { Servicio } from '../../types/servicios';
+// API
+import { obtenerUbymedAPI } from '../../api/ubymed';
 
 export default function InicioScreen() {
   const [servicios, setServicios] = useState<Servicio[] | null>(null);
@@ -41,7 +45,7 @@ export default function InicioScreen() {
           sections={[
             { title: 'Servicios Disponibles', data: servicios },
             { title: 'Directorios', data: servicios },
-            { title: 'Promociones', data: servicios },
+            { title: 'Productos', data: servicios },
           ]}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
